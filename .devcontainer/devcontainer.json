@@ -120,7 +120,7 @@
 					"editor.formatOnSave": true,
 					"editor.defaultFormatter": "charliermarsh.ruff"
 				},
-				"python.defaultInterpreterPath": "/usr/local/bin/python"
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
 			}
 		}
 	}
