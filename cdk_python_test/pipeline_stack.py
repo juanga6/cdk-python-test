@@ -3,7 +3,8 @@ from aws_cdk import (
     pipelines as pipelines,
 )
 from constructs import Construct
-from pipeline_stage import WorkshopPipelineStage
+
+from .pipeline_stage import WorkshopPipelineStage
 
 
 class WorkshopPipelineStack(Stack):

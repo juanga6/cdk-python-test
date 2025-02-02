@@ -1,6 +1,7 @@
 from aws_cdk import Stage
-from cdk_python_test_stack import CdkPythonTestStack
 from constructs import Construct
+
+from .cdk_python_test_stack import CdkPythonTestStack
 
 
 class WorkshopPipelineStage(Stage):
