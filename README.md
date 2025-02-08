@@ -1,6 +1,12 @@
 
 # Welcome to your CDK Python project!
 
+## Based on this tutorial
+
+<http://cdk-worshop-complete-coding.s3-website.eu-central-1.amazonaws.com/30-python.html>
+
+## Info
+
 This is a blank project for CDK development with Python.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
