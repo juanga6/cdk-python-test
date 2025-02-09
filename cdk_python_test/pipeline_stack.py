@@ -1,4 +1,6 @@
 from aws_cdk import Stack
+from aws_cdk import aws_codebuild as codebuild
+from aws_cdk import aws_codepipeline_actions as codepipeline_actions
 from aws_cdk import (
     pipelines as pipelines,
 )
@@ -51,4 +53,45 @@ class WorkshopPipelineStack(Stack):
                     "curl -Ssf $ENDPOINT_URL/test",
                 ],
             )
+        )
+
+        # Test stage
+        test_stage = codebuild.PipelineProject(
+            self,
+            "TestStage",
+            build_spec=codebuild.BuildSpec.from_object(
+                {
+                    "version": "0.2",
+                    "phases": {
+                        "install": {
+                            "commands": [
+                                "echo Installing dependencies...",
+                                "pip install -r requirements-dev.txt",  # Instala las dependencias
+                                "pip install pytest",  # Instala pytest
+                            ],
+                        },
+                        "build": {
+                            "commands": [
+                                "echo Running tests...",
+                                "pytest",  # Ejecuta pytest
+                            ],
+                        },
+                    },
+                    "artifacts": {
+                        "files": ["**/*"],
+                    },
+                }
+            ),
+        )
+
+        # Fase de la pipeline: Ejecutar pruebas con pytest
+        pipeline.add_stage(
+            stage_name="Test",
+            actions=[
+                codepipeline_actions.CodeBuildAction(
+                    action_name="RunTests",
+                    project=test_stage,
+                    input=git_input,
+                )
+            ],
         )
